@@ -15,7 +15,6 @@ import { MulterModule } from '@nestjs/platform-express';
 import { PdfdownloadService } from './pdfdownload/pdfdownload.service';
 import { PdfdownloadController } from './pdfdownload/pdfdownload.controller';
 import { PdfdownloadModule } from './pdfdownload/pdfdownload.module';
-import { ModuleService } from './module/module.service';
 import { EnrollmentsService } from './enrollments/enrollments.service';
 import { EnrollmentsController } from './enrollments/enrollments.controller';
 import { EnrollmentsModule } from './enrollments/enrollments.module';
@@ -23,6 +22,6 @@ import { EnrollmentsModule } from './enrollments/enrollments.module';
 @Module({
   imports: [SupabaseModule, UsersModule, CoursesModule, PdfsModule, MulterModule, PdfdownloadModule, EnrollmentsModule],
   controllers: [AppController, TestController, ProfileController, PdfsController, PdfdownloadController, EnrollmentsController],
-  providers: [AppService, UsersService, PdfsService, PdfdownloadService, ModuleService, EnrollmentsService],
+  providers: [AppService, UsersService, PdfsService, PdfdownloadService, EnrollmentsService],
 })
 export class AppModule {}
