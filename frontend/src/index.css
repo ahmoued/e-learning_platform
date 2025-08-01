@@ -1,0 +1,9 @@
+/* Remove all default margins/padding and ensure full coverage */
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100vh;
+  background-color: #949495; /* Your outer grey */
+}
+

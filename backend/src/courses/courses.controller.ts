@@ -12,7 +12,7 @@ export class CoursesController {
 
     //get all courses
     @Get()
-    @Roles('student')
+    //@Roles('student')
     async getCourses(@Request() request: AuthRequest){
         return this.coursesService.findAll();
     }
@@ -21,9 +21,9 @@ export class CoursesController {
     //add a new course (instructors only)
     @Post()
     @Roles('instructor')
-    async create(@Request() request: AuthRequest, @Body() title: string){
+    async create(@Request() request: AuthRequest, @Body('title') title: string, @Body('description') description: string){
         if (!request.user) throw new UnauthorizedException
-        return this.coursesService.create(title, request.user.id)
+        return this.coursesService.create(title, request.user.id, description)
     }
     @Put(':id')
     @Roles('instructor')

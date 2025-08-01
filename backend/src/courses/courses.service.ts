@@ -30,11 +30,11 @@ export class CoursesService {
     }
     // create a new course (instructors only)
     
-    async create(title: string, instructorId: string){
+    async create(title: string, instructorId: string, description: string){
         const supabase =await this.supabaseService.getclient();
         const {data, error} = await supabase
         .from('courses')
-        .insert({title:title, instructor_id: instructorId})
+        .insert({title:title, instructor_id: instructorId, description: description})
         .select();
         if(error) throw new Error(error.message);
         return data[0]
