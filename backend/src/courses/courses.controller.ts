@@ -12,18 +12,25 @@ export class CoursesController {
 
     //get all courses
     @Get()
-    //@Roles('student')
+    @Roles('student')
     async getCourses(@Request() request: AuthRequest){
         return this.coursesService.findAll();
+    }
+    @Get('me')
+    @Roles('student')
+    async getmyCourses(@Request() request: AuthRequest){
+         if (!request.user) throw new UnauthorizedException
+         const id = request.user.id;
+         return this.coursesService.getMyCourses(id)
     }
     
     
     //add a new course (instructors only)
     @Post()
     @Roles('instructor')
-    async create(@Request() request: AuthRequest, @Body('title') title: string, @Body('description') description: string){
+    async create(@Request() request: AuthRequest, @Body('title') title: string, @Body('description') description: string, @Body('maxStudents') maxStudents: string){
         if (!request.user) throw new UnauthorizedException
-        return this.coursesService.create(title, request.user.id, description)
+        return this.coursesService.create(title, request.user.id, description, maxStudents)
     }
     @Put(':id')
     @Roles('instructor')
@@ -38,6 +45,7 @@ export class CoursesController {
         return this.coursesService.delete(request.user.id, id)
 
     }
+
     @Get('mycourses')
     @Roles('instructor')
     async getInstrctorCourses(@Request() request: AuthRequest){
@@ -45,6 +53,20 @@ export class CoursesController {
         const myId = request.user.id
         return this.coursesService.findByInstructorId(myId)
     }
+    /*@Get('/:id')
+    @Roles('instructor')
+    async getCourseDetails(@Request() request: AuthRequest, @Param('id') id: string){
+        if (!request.user) throw new UnauthorizedException
+        return this.coursesService.getCourseDetails(request.user.id, id)
+    }*/
+
+    @Get('/:id')
+    @Roles('student', 'instructor')
+    async CourseDetails(@Request() request: AuthRequest, @Param('id') id: string){
+        if (!request.user) throw new UnauthorizedException
+        return this.coursesService.getCourseDetails(request.user.id, id, request.user.role)
+    }
+    
 
 
 }

@@ -7,7 +7,7 @@ import { AuthRequest } from 'src/types/auth-request.type';
 @Injectable()
 export class PdfsService {
     constructor(private readonly supabaseService: SupabaseService){}
-    async uploadPdf(file: Express.Multer.File, instructorId, courseId){
+    async uploadPdf(file: Express.Multer.File,name, instructorId, courseId){
         const supabase = this.supabaseService.getclient()
         //check if the instructor and course match
         const {data: course} = await supabase
@@ -33,7 +33,8 @@ export class PdfsService {
         .insert({
             course_id: courseId,
             uploaded_by: instructorId,
-            file_url: filename
+            file_url: filename,
+            name: name
         })
         .select()
         .single();
@@ -53,7 +54,7 @@ export class PdfsService {
     .from('pdfs')
     .select('*')
     .eq('course_id', courseId)
-    .maybeSingle()
+    //.maybeSingle()
     if (error) throw new Error(error.message) 
     return data
    }

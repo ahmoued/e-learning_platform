@@ -21,9 +21,9 @@ export class PdfsController {
     @Roles('instructor')
     @Post('upload')
     @UseInterceptors(FileInterceptor('file'))
-    async uploadPdf(@UploadedFile() file : Express.Multer.File, @Body('course_id') courseId: string, @Request() request: AuthRequest ){
+    async uploadPdf(@UploadedFile() file : Express.Multer.File, @Body('course_id') courseId: string, @Body('name') name: string, @Request() request: AuthRequest ){
         if (!request.user) throw new UnauthorizedException(); 
-        return this.pdfsserive.uploadPdf(file, request.user.id, courseId)
+        return this.pdfsserive.uploadPdf(file,name, request.user.id, courseId)
     }
     @Get(':id')
     async listPdfs(@Request() request: AuthRequest, @Param('id') id: string){
