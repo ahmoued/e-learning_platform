@@ -9,6 +9,7 @@ import { useApp } from "@/context/AppContext";
 import { Navbar } from "@/components/Navbar";
 import { supabase } from "@/lib/supabase";
 import axios from "axios";
+import ChatBox from "@/components/ChatBox";
 /* Mock student data
 const mockStudents = [
   { id: '1', name: 'Alice Johnson', email: 'alice@example.com', enrolledAt: '2024-01-15' },
@@ -37,6 +38,7 @@ const CourseDetails = () => {
   const [userId, setUserId] = useState()
   const [userRole, setUserRole] = useState()
   const [enrolled, setEnrolled] = useState(false)
+  const [showChat, setShowChat] = useState(false)
 
 
 type Course = {
@@ -411,6 +413,19 @@ type Course = {
           )}
         </div>
       </div>
+      {/* Floating Chat Button */}
+      <button
+      onClick={() => setShowChat(true)}
+      className="fixed bottom-6 right-6 z-50 bg-primary text-white p-4 rounded-full shadow-lg hover:bg-primary-dark"
+      >
+  💬
+      </button>
+      {showChat && (
+      <div className="fixed bottom-6 right-6 z-50">
+      <ChatBox courseId={course.id} />
+  </div>
+)}
+
     </div>
   );
 };

@@ -16,7 +16,6 @@ export class AuthGuard implements CanActivate {
     const supabase=this.supabaseService.getclient();
     const {data, error} = await supabase.auth.getUser(token)
     console.log(error)
-        console.log("ffffffffffffffffff")
 
     console.log(data)
 

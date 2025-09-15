@@ -18,9 +18,10 @@ import { PdfdownloadModule } from './pdfdownload/pdfdownload.module';
 import { EnrollmentsService } from './enrollments/enrollments.service';
 import { EnrollmentsController } from './enrollments/enrollments.controller';
 import { EnrollmentsModule } from './enrollments/enrollments.module';
+import { ChatModule } from './chat/chat.module';
 
 @Module({
-  imports: [SupabaseModule, UsersModule, CoursesModule, PdfsModule, MulterModule, PdfdownloadModule, EnrollmentsModule],
+  imports: [SupabaseModule, UsersModule, CoursesModule, PdfsModule, MulterModule, PdfdownloadModule, EnrollmentsModule, ChatModule],
   controllers: [AppController, TestController, ProfileController, PdfsController, PdfdownloadController, EnrollmentsController],
   providers: [AppService, UsersService, PdfsService, PdfdownloadService, EnrollmentsService],
 })
