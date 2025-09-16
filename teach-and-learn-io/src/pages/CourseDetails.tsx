@@ -10,7 +10,8 @@ import { Navbar } from "@/components/Navbar";
 import { supabase } from "@/lib/supabase";
 import axios from "axios";
 import ChatBox from "@/components/ChatBox";
-/* Mock student data
+import React from 'react';
+import { ClipLoader } from 'react-spinners';/* Mock student data
 const mockStudents = [
   { id: '1', name: 'Alice Johnson', email: 'alice@example.com', enrolledAt: '2024-01-15' },
   { id: '2', name: 'Bob Smith', email: 'bob@example.com', enrolledAt: '2024-01-18' },
@@ -106,6 +107,20 @@ type Course = {
   
   //const [students] = useState(mockStudents);
   //const [pdfs] = useState(mockPDFs);
+
+  if (loading) {
+  // Spinner.js
+
+  return (
+    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+      <ClipLoader color="#4caf50" size={50} />
+    </div>
+  );
+};
+
+
+
+
 
   if (!course) {
     return (
